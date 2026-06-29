@@ -18,41 +18,54 @@ public class StudentRepository {
     }
 
     public void saveStudent(Student student){
-        // your code goes here
+       studentMap.put(student.getName(),student);
     }
 
     public void saveTeacher(Teacher teacher){
-        // your code goes here
+        teacherMap.put(teacher.getName(),teacher);
     }
 
     public void saveStudentTeacherPair(String student, String teacher){
+        List<String> list=new ArrayList<>();
+
         if(studentMap.containsKey(student) && teacherMap.containsKey(teacher)){
             // your code goes here
+            list.add(student);
+            teacherStudentMapping.put(teacher,list);
         }
     }
 
     public Student findStudent(String student){
-        // your code goes here
+        return studentMap.get(student);
     }
 
     public Teacher findTeacher(String teacher){
-        // your code goes here
+        return teacherMap.get(teacher);
     }
 
     public List<String> findStudentsFromTeacher(String teacher){
         // your code goes here
         // find student list corresponding to a teacher
+        return teacherStudentMapping.get(teacher);
     }
 
     public List<String> findAllStudents(){
         // your code goes here
+        List<String> ans=new ArrayList<>();
+        for(Map.Entry<String,Student> map:studentMap.entrySet()){
+            ans.add(map.getKey());
+        }
+        return ans;
+
     }
 
     public void deleteTeacher(String teacher){
         // your code goes here
+        teacherMap.remove(teacher);
     }
 
     public void deleteAllTeachers(){
         // your code goes here
+        teacherMap.clear();
     }
 }
